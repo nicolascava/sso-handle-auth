@@ -1,0 +1,67 @@
+{
+  "name": "sso-handle-auth",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Express middleware to handle SSO authentication",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.0.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "chai": "^4.1.2",
+    "eslint": "^4.12.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-babel": "^4.1.2",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.5.1",
+    "mocha": "^5.1.1"
+  },
+  "dependencies": {
+    "lodash": "^4.17.5"
+  },
+  "scripts": {
+    "lint": "eslint ./ --config ./package.json --ignore-path ./.eslintignore",
+    "test": "mocha ./test/*.js  --require ./lib/requireBabelRegister.js"
+  },
+  "eslintConfig": {
+    "extends": "airbnb",
+    "parser": "babel-eslint",
+    "rules": {
+      "max-len": [
+        2,
+        100,
+        4,
+        {
+          "ignorePattern": "\\s*<"
+        }
+      ]
+    },
+    "globals": {
+      "document": true,
+      "window": true,
+      "navigator": true,
+      "URL": true,
+      "fetch": true,
+      "it": true,
+      "describe": true
+    }
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-0"
+    ],
+    "plugins": [
+      [
+        "transform-runtime",
+        {
+          "polyfill": true,
+          "regenerator": true
+        }
+      ]
+    ]
+  }
+}

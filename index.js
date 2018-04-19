@@ -1,11 +1,13 @@
 import url from 'url';
-import {isString} from 'lodash';
+import _ from 'lodash';
 
-function handleAuth(targetDomain) {
-  if (!isString(targetDomain)) throw new Error('Handle Auth Module Init - targetDomain must be a string.');
+export default function (targetDomain) {
+  if (!_.isString(targetDomain)) {
+    throw new Error('`targetDomain` must be a string');
+  }
 
   if (!url.parse(targetDomain).hostname) {
-    throw new Error('Handle Auth Module Init - targetDomain must be a valid URL.');
+    throw new Error('`targetDomain` must be a valid URL');
   }
 
   return (req, res) => {
@@ -21,10 +23,10 @@ function handleAuth(targetDomain) {
               
               if (event.data.ssid) {
                 document.cookie = 'ssid=' + event.data.ssid;
-                event.source.postMessage({created: true}, event.origin);
+                event.source.postMessage({ created: true }, event.origin);
               } else if (event.data.destroy) {
                 document.cookie = 'ssid=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-                event.source.postMessage({destroyed: true}, event.origin);
+                event.source.postMessage({ destroyed: true }, event.origin);
               }
             }
 
@@ -37,5 +39,3 @@ function handleAuth(targetDomain) {
     `);
   };
 }
-
-export default handleAuth;

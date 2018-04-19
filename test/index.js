@@ -1,22 +1,19 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 
-import handleAuth from 'packages/helpers/node/handle-auth';
+import handleAuth from '../';
 
-describe('Handle Auth module', () => {
-  describe('handleAuth()', () => {
-    it('Should throw an error if the argument is not a string.', () => {
-      expect(handleAuth).to.throw(Error);
-    });
+describe('handleAuth()', () => {
+  it('should throw an error if the argument is not a string', () =>
+    expect(handleAuth).to.throw(Error));
 
-    it('Should throw an error if the argument is not an URL.', () => {
-      function notAnURLTest() {
-        return handleAuth('yolo');
-      }
-      expect(notAnURLTest).to.throw(Error);
-    });
+  it('should throw an error if the argument is not an URL', () => {
+    function notATestURL() {
+      return handleAuth('test');
+    }
 
-    it('Should return a function.', () => {
-      expect(handleAuth('http://someUrl.com')).to.be.an('function');
-    });
+    expect(notATestURL).to.throw(Error);
   });
+
+  it('should return a function', () =>
+    expect(handleAuth('http://someurl.com')).to.be.an('function'));
 });
